@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://brm5ve3y1gvsc"]
+
+[ext_resource type="Script" path="res://scripts/RollSetContainer.gd" id="1_cdvle"]
+[ext_resource type="Texture2D" uid="uid://d26bwooincvuc" path="res://icons/background.png" id="2_ad32i"]
+[ext_resource type="Script" path="res://scripts/AutoScale_NinePatchRect.gd" id="3_t8sem"]
+[ext_resource type="Texture2D" uid="uid://dbbso3tiduvo2" path="res://icons/edit_button.png" id="4_35pkd"]
+[ext_resource type="Texture2D" uid="uid://d14ao1mirf0ff" path="res://icons/add_button.png" id="5_pfjig"]
+[ext_resource type="Texture2D" uid="uid://b0r7fd1yspnju" path="res://icons/delete_button.png" id="6_gsr75"]
+[ext_resource type="Texture2D" uid="uid://b6ipiwvbrifw" path="res://icons/long_button.png" id="8_y0662"]
+[ext_resource type="Texture2D" uid="uid://b4d3e4iiu7jnb" path="res://icons/long_dark_button.png" id="9_p6l21"]
+
+[node name="RollSetContainer" type="Control"]
+custom_minimum_size = Vector2(400, 84)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_cdvle")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." node_paths=PackedStringArray("ScaleTo", "PushScale")]
+layout_mode = 2
+offset_right = 398.0
+offset_bottom = 83.0
+texture = ExtResource("2_ad32i")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+script = ExtResource("3_t8sem")
+ScaleTo = NodePath("../VBoxContainer")
+PushScale = NodePath("..")
+padding = 6
+
+[node name="VBoxContainer" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(367, 0)
+layout_mode = 2
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 373.0
+offset_bottom = 76.0
+vertical = true
+
+[node name="TitleContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(386, 32)
+layout_mode = 2
+
+[node name="TitleLineEdit" type="LineEdit" parent="VBoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Attack Roll"
+editable = false
+
+[node name="EditButton" type="TextureButton" parent="VBoxContainer/TitleContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_35pkd")
+stretch_mode = 3
+
+[node name="AddButton" type="TextureButton" parent="VBoxContainer/TitleContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_pfjig")
+stretch_mode = 3
+
+[node name="DeleteButton" type="TextureButton" parent="VBoxContainer/TitleContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_gsr75")
+stretch_mode = 3
+
+[node name="RollLinesContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ResultsContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ResultsLine" type="LineEdit" parent="VBoxContainer/ResultsContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[node name="RollButton" type="TextureButton" parent="VBoxContainer/ResultsContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("8_y0662")
+texture_pressed = ExtResource("9_p6l21")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/ResultsContainer/RollButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Roll"
+horizontal_alignment = 1
+vertical_alignment = 1
