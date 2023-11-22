@@ -1,6 +1,6 @@
 extends Control
 
-const source_path = "C:\\Users\\johnnie.hunt\\Documents\\Personal\\D&D\\Maps&Management"
+var source_path = "./data"
 
 @onready var tree : Tree = $BoxContainer/Tree
 @onready var dm_map = $"../DMMapController"
@@ -207,3 +207,8 @@ func load_map(save_path):
 			loading_node.load_data(source_path + save_path + "\\", node_data)
 		else:
 			print("No load_data method found on " + node_data["node_path"])
+
+func load_config(data):
+	source_path = data["data_path"]
+	build_tree()
+	print("Save Controller Confg Loaded")

@@ -41,6 +41,7 @@ var need_rescale : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("DM Map Ready")
 	dm_display_tile_size = 20
 	var image_size = map_image.texture.get_size()
 	map_container.custom_minimum_size = image_size

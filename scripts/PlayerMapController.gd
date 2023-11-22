@@ -41,6 +41,7 @@ var target_grid_dimensions : Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("Player Map Ready")
 	dm_map_controller.map_data_initialized.connect(init_map)
 #	dm_map_controller.map_rescaled.connect(scale_map)
 	pass # Replace with function body.
