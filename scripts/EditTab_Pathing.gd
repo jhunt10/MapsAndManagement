@@ -9,6 +9,7 @@ const SOUTH_WEST : int = 5
 const WEST : int = 6
 const NORTH_WEST : int = 7
 
+@onready var are_you_sure_box = $"../../../../AreYouSure"
 @onready var dm_map_controller = $"../../../../DMMapController"
 var path_map : Node 
 
@@ -59,6 +60,9 @@ func _process(delta):
 	pass
 
 func on_clear():
+	are_you_sure_box.bind_action("Erase all path data", confirm_clear)
+
+func confirm_clear():
 	path_map.clear_all()
 
 func apply_line(start_pos:Vector2i, end_pos:Vector2i):

@@ -38,6 +38,11 @@ var image_scale : float = 1
 
 var need_rescale : bool = false
 
+var player_tile_grid: TileMap = null:
+	get:
+		return player_map_controller.tile_grid
+	set(value):
+		pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

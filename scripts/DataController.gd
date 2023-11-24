@@ -23,7 +23,6 @@ func _ready():
 	save_button.pressed.connect(save_map_settings)
 	reload_button.pressed.connect(reload_map_settings)
 	save_name_input.text = "\\demo_map.map"
-	load_map("/demo_map")
 	
 func save_map_settings():
 	var main_node = $".."
@@ -208,7 +207,8 @@ func load_map(save_path):
 		else:
 			print("No load_data method found on " + node_data["node_path"])
 
-func load_config(data):
-	source_path = data["data_path"]
-	build_tree()
+func load_config(data:Dictionary):
+	if data.has("data_path"):
+		source_path = data["data_path"]
+		build_tree()
 	print("Save Controller Confg Loaded")

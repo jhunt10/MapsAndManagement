@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c6fdav0kdslof"]
+[gd_scene load_steps=44 format=3 uid="uid://c6fdav0kdslof"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_e2nxv"]
 [ext_resource type="Script" path="res://scripts/WindowWidget.gd" id="3_52f2p"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b6paa8c5g48jw" path="res://tiles/ui_tiles.png" id="4_5bwyr"]
 [ext_resource type="Texture2D" uid="uid://5jsvfp2ycrv7" path="res://icons/arrow_button_R.png" id="4_hxf0n"]
 [ext_resource type="Script" path="res://scripts/TileMapInputController.gd" id="5_ulp6f"]
+[ext_resource type="Texture2D" uid="uid://go6r1n0s2ogo" path="res://tiles/terrain_tiles.png" id="6_f0yyf"]
 [ext_resource type="TileSet" uid="uid://di0ig3cwvyfwe" path="res://scripts/show_map_tile_set.tres" id="6_y8ph8"]
 [ext_resource type="Script" path="res://scripts/AutoScale_NinePatchRect.gd" id="7_j5muy"]
 [ext_resource type="Texture2D" uid="uid://hyo2ng61uqr4" path="res://tiles/shadow.png" id="7_nuuf5"]
@@ -14,7 +15,6 @@
 [ext_resource type="Script" path="res://scripts/PlayerMapController.gd" id="8_j112n"]
 [ext_resource type="Texture2D" uid="uid://bu2b08v2iqamk" path="res://maps/test_map.png" id="8_wnuiv"]
 [ext_resource type="Texture2D" uid="uid://b6ipiwvbrifw" path="res://icons/long_button.png" id="11_iji85"]
-[ext_resource type="Script" path="res://scripts/SaveController.gd" id="12_6s1h2"]
 [ext_resource type="Script" path="res://scripts/DMMapController.gd" id="13_2xdyj"]
 [ext_resource type="Script" path="res://scripts/ShadowMap.gd" id="14_7ypnu"]
 [ext_resource type="Texture2D" uid="uid://7l2wmxp5yy4u" path="res://icons/outline.png" id="14_ryioi"]
@@ -28,11 +28,14 @@
 [ext_resource type="Script" path="res://scripts/DataController.gd" id="21_46vdb"]
 [ext_resource type="Script" path="res://scripts/SaveFlag.gd" id="22_bp1yj"]
 [ext_resource type="Script" path="res://scripts/EditTab_Shadow.gd" id="22_v2pk0"]
+[ext_resource type="Script" path="res://scripts/AreYouSureBox.gd" id="23_yqyk4"]
 [ext_resource type="Script" path="res://scripts/EditTab_Pathing.gd" id="24_vgjvw"]
 [ext_resource type="Script" path="res://scripts/RollBoxController.gd" id="28_k4lqk"]
 [ext_resource type="Script" path="res://scripts/LootTableController.gd" id="28_pgid7"]
 [ext_resource type="Texture2D" uid="uid://cax4m4rqjbv5w" path="res://icons/x_button.png" id="28_xkyjr"]
 [ext_resource type="Texture2D" uid="uid://d14ao1mirf0ff" path="res://icons/add_button.png" id="29_rdmnq"]
+[ext_resource type="Script" path="res://scripts/EditTab_Zoneing.gd" id="30_ci0k0"]
+[ext_resource type="Script" path="res://scripts/TerrainOptionController.gd" id="31_b1n5d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mqhwx"]
 texture = ExtResource("4_2uaj3")
@@ -74,10 +77,30 @@ texture_region_size = Vector2i(20, 20)
 2:3/0 = 0
 3:3/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rk73o"]
+texture = ExtResource("6_f0yyf")
+texture_region_size = Vector2i(20, 20)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_7qa8c"]
 tile_size = Vector2i(20, 20)
 sources/0 = SubResource("TileSetAtlasSource_mqhwx")
 sources/1 = SubResource("TileSetAtlasSource_sy5ug")
+sources/2 = SubResource("TileSetAtlasSource_rk73o")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fai7j"]
 shader = ExtResource("15_2n7su")
@@ -98,6 +121,7 @@ script = ExtResource("1_e2nxv")
 [node name="Window" type="Window" parent="."]
 mode = 3
 size = Vector2i(800, 600)
+visible = false
 borderless = true
 
 [node name="PlayerMapController" type="Node2D" parent="Window"]
@@ -141,9 +165,6 @@ offset_right = 80.0
 offset_bottom = 80.0
 rotation = 1.5708
 texture = ExtResource("7_nuuf5")
-
-[node name="SaveController" type="Node" parent="."]
-script = ExtResource("12_6s1h2")
 
 [node name="DMMapController" type="Control" parent="." groups=["Saveable"]]
 layout_mode = 3
@@ -477,6 +498,93 @@ layout_mode = 2
 min_value = -999.0
 max_value = 999.0
 
+[node name="AreYouSure" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 419.0
+offset_top = 343.0
+offset_right = 719.0
+offset_bottom = 439.0
+script = ExtResource("23_yqyk4")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="AreYouSure" node_paths=PackedStringArray("ScaleTo")]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 120.0
+texture = ExtResource("7_s4lme")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+script = ExtResource("7_j5muy")
+ScaleTo = NodePath("../BoxContainer")
+
+[node name="BoxContainer" type="BoxContainer" parent="AreYouSure"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+vertical = true
+
+[node name="Label" type="Label" parent="AreYouSure/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Are you sure you want to "
+horizontal_alignment = 1
+max_lines_visible = 2
+
+[node name="VarTextLabel" type="Label" parent="AreYouSure/BoxContainer"]
+modulate = Color(0.603922, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Kill all humans?"
+horizontal_alignment = 1
+max_lines_visible = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AreYouSure/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NoButton" type="TextureButton" parent="AreYouSure/BoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 36)
+layout_direction = 2
+layout_mode = 2
+texture_normal = ExtResource("11_iji85")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="AreYouSure/BoxContainer/HBoxContainer/NoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "No"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YesButton" type="TextureButton" parent="AreYouSure/BoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 36)
+layout_direction = 2
+layout_mode = 2
+texture_normal = ExtResource("11_iji85")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="AreYouSure/BoxContainer/HBoxContainer/YesButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Yes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="WindowWidget" type="GridContainer" parent="."]
 offset_left = 340.0
 offset_top = 810.0
@@ -542,6 +650,7 @@ custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
 [node name="View" type="BoxContainer" parent="MapEditorController/Box/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="DisplayGridLabel" type="Label" parent="MapEditorController/Box/TabContainer/View"]
@@ -858,6 +967,88 @@ grow_vertical = 2
 text = "Clear"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Zones" type="BoxContainer" parent="MapEditorController/Box/TabContainer" groups=["Saveable"]]
+layout_mode = 2
+script = ExtResource("30_ci0k0")
+
+[node name="DrawButtons" type="BoxContainer" parent="MapEditorController/Box/TabContainer/Zones"]
+layout_mode = 2
+vertical = true
+
+[node name="ButtonsContainer" type="BoxContainer" parent="MapEditorController/Box/TabContainer/Zones/DrawButtons"]
+layout_mode = 2
+
+[node name="AddButton" type="TextureButton" parent="MapEditorController/Box/TabContainer/Zones/DrawButtons/ButtonsContainer"]
+custom_minimum_size = Vector2(100, 36)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("11_iji85")
+texture_disabled = ExtResource("19_3511q")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MapEditorController/Box/TabContainer/Zones/DrawButtons/ButtonsContainer/AddButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Add"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EraseButton" type="TextureButton" parent="MapEditorController/Box/TabContainer/Zones/DrawButtons/ButtonsContainer"]
+custom_minimum_size = Vector2(100, 36)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("11_iji85")
+texture_disabled = ExtResource("19_3511q")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MapEditorController/Box/TabContainer/Zones/DrawButtons/ButtonsContainer/EraseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Erase"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EraseButton2" type="TextureButton" parent="MapEditorController/Box/TabContainer/Zones/DrawButtons/ButtonsContainer"]
+custom_minimum_size = Vector2(100, 36)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("11_iji85")
+texture_disabled = ExtResource("19_3511q")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MapEditorController/Box/TabContainer/Zones/DrawButtons/ButtonsContainer/EraseButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Erase"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MapEditorController/Box/TabContainer/Zones/DrawButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="TerrainOptionController" type="GridContainer" parent="MapEditorController/Box/TabContainer/Zones/DrawButtons/ScrollContainer"]
+layout_mode = 2
+columns = 4
+script = ExtResource("31_b1n5d")
 
 [node name="ApplyButton" type="TextureButton" parent="MapEditorController/Box"]
 custom_minimum_size = Vector2(100, 36)

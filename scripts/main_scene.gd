@@ -2,14 +2,14 @@ extends Node2D
 
 @onready var window : Window = $Window
 
-@onready var save_controller : Node = $SaveController
+@onready var data_controller : Node = $DataController
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Main Ready")
 	load_config()
-#	window.set_current_screen(1)
-#	window.mode = Window.MODE_FULLSCREEN
+	
+	data_controller.load_map("/demo_map")
 	pass # Replace with function body.
 
 
