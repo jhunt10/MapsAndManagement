@@ -4,6 +4,7 @@ extends Control
 signal map_data_initialized
 signal map_rescaled
 signal map_moved
+signal map_inputs_changed
 
 const SNAP_VIEW_TO_GRID = false
 const CENTER_VIEW_ON_TILE_CENTER = true
@@ -207,8 +208,17 @@ func update_view_preview():
 	var view_offset = calc_view_center_offset(player_map_controller.view_grid_dimensions, grid_tile_size)
 	view_preview.position = (player_map_controller.view_grid_position * grid_tile_size) - view_offset
 
-func on_click():
+
+func set_screen_size(vec:Vector2):
+	var width_in_tiles = floori(vec.x / image_tile_size)
+	var hight_in_tiles = floori(vec.y / image_tile_size)
+	view_grid_dimensions = Vector2(width_in_tiles, hight_in_tiles)
+	
+	print(view_grid_dimensions)
+	map_inputs_changed.emit()
+	player_map_controller.sync_view(true)
 	pass
+
 
 func set_image_tile_size(val):
 	self.image_tile_size= val
@@ -246,6 +256,7 @@ func set_grid_view_hight(val):
 	self.view_grid_dimensions.y = val
 	var screen_ratio = float(player_map_controller.window.size.x) / float(player_map_controller.window.size.y)
 	self.view_grid_dimensions.x = float(val) * screen_ratio
+	map_inputs_changed.emit()
 	update_view_preview()
 
 func set_grid_view_pos_x(val):

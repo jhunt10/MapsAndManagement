@@ -17,6 +17,7 @@ extends Control
 func _ready():
 	if map_controller:
 		map_controller.map_data_initialized.connect(initalize_inputs)
+		map_controller.map_inputs_changed.connect(initalize_inputs)
 		map_controller.map_moved.connect(map_moved)
 		
 		grid_tile_size_input.value_changed.connect(map_controller.set_grid_tile_size)
@@ -43,8 +44,10 @@ func initalize_inputs():
 	image_tile_size_input.set_value_no_signal(map_controller.image_tile_size)
 	xoffset_input.set_value_no_signal(map_controller.image_offset.x)
 	yoffset_input.set_value_no_signal(map_controller.image_offset.y)
-	view_width_input.set_value_no_signal(map_controller.view_grid_dimensions.x)
-	view_hight_input.set_value_no_signal(map_controller.view_grid_dimensions.y)
+	var width = float(float(floori(map_controller.view_grid_dimensions.x * 100)) / float(100))
+	view_width_input.set_value_no_signal(width)
+	var hight = float(float(floori(map_controller.view_grid_dimensions.y * 100)) / float(100))
+	view_hight_input.set_value_no_signal(hight)
 	view_x_input.set_value_no_signal(map_controller.view_grid_position.x)
 	view_y_input.set_value_no_signal(map_controller.view_grid_position.y)
 	

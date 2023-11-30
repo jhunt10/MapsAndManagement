@@ -28,6 +28,7 @@ var drag_rect : Rect2i = Rect2i(0,0,0,0)
 func _ready():
 	
 	dm_map_controller.map_data_initialized.connect(initalize_inputs)
+	dm_map_controller.map_inputs_changed.connect(initalize_inputs)
 	display_tile_size_input.value_changed.connect(dm_map_controller.set_display_tile_size)
 	shadow_alpha_input.value_changed.connect(on_shadow_alpha_change)
 	apply_button.button_down.connect(on_apply)

@@ -119,9 +119,7 @@ font_size = 42
 script = ExtResource("1_e2nxv")
 
 [node name="Window" type="Window" parent="."]
-mode = 3
 size = Vector2i(800, 600)
-visible = false
 borderless = true
 
 [node name="PlayerMapController" type="Node2D" parent="Window"]
@@ -459,6 +457,7 @@ horizontal_alignment = 2
 layout_mode = 2
 min_value = -999.0
 max_value = 999.0
+step = 0.0
 editable = false
 
 [node name="GridViewHightLable" type="Label" parent="TileMapInputController/BoxContainer/ViewGridDim"]
@@ -471,6 +470,7 @@ horizontal_alignment = 2
 layout_mode = 2
 min_value = -999.0
 max_value = 999.0
+step = 0.0
 
 [node name="ViewGridPos" type="BoxContainer" parent="TileMapInputController/BoxContainer"]
 layout_mode = 2
@@ -585,24 +585,39 @@ text = "Yes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WindowWidget" type="GridContainer" parent="."]
+[node name="NinePatchRect2" type="NinePatchRect" parent="." node_paths=PackedStringArray("ScaleTo")]
 offset_left = 340.0
 offset_top = 810.0
-offset_right = 526.0
-offset_bottom = 874.0
+offset_right = 538.0
+offset_bottom = 886.0
+texture = ExtResource("7_s4lme")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+script = ExtResource("7_j5muy")
+ScaleTo = NodePath("WindowWidget")
+padding = 6
+
+[node name="WindowWidget" type="GridContainer" parent="NinePatchRect2"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 192.0
+offset_bottom = 70.0
 columns = 3
 script = ExtResource("3_52f2p")
 
-[node name="LeftButton" type="TextureButton" parent="WindowWidget"]
+[node name="LeftButton" type="TextureButton" parent="NinePatchRect2/WindowWidget"]
 layout_mode = 2
 texture_normal = ExtResource("3_edfiv")
 stretch_mode = 0
 
-[node name="IndexLabel" type="Label" parent="WindowWidget"]
+[node name="IndexLabel" type="Label" parent="NinePatchRect2/WindowWidget"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="RightButton" type="TextureButton" parent="WindowWidget"]
+[node name="RightButton" type="TextureButton" parent="NinePatchRect2/WindowWidget"]
 layout_mode = 2
 texture_normal = ExtResource("4_hxf0n")
 
@@ -650,7 +665,6 @@ custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
 [node name="View" type="BoxContainer" parent="MapEditorController/Box/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="DisplayGridLabel" type="Label" parent="MapEditorController/Box/TabContainer/View"]
@@ -841,6 +855,7 @@ text = "Show Grid"
 
 [node name="ShowPathCeckBox" type="CheckBox" parent="MapEditorController/Box/TabContainer/Pathing/PathDrawButtons/BoxContainer3/ShowContainer"]
 layout_mode = 2
+button_pressed = true
 
 [node name="BoxContainer" type="BoxContainer" parent="MapEditorController/Box/TabContainer/Pathing/PathDrawButtons"]
 layout_mode = 2
@@ -969,6 +984,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Zones" type="BoxContainer" parent="MapEditorController/Box/TabContainer" groups=["Saveable"]]
+visible = false
 layout_mode = 2
 script = ExtResource("30_ci0k0")
 
