@@ -1,4 +1,4 @@
-extends Control
+extends "res://scripts/DragWindow.gd"
 
 @onready var save_input : LineEdit = $BoxContainer/ControllerBoxContainer/SaveLoadContainer/SaveNameInput
 @onready var save_button : TextureButton = $BoxContainer/ControllerBoxContainer/SaveLoadContainer/SaveButton
@@ -11,10 +11,13 @@ extends Control
 @onready var results_line : LineEdit = $BoxContainer/ControllerBoxContainer/ResultsLineEdit
 @onready var add_button : TextureButton = $BoxContainer/ControllerBoxContainer/MinAvgMaxContainer/AddButton
 
+@onready var _drag_element : Node = $BoxContainer/ControllerBoxContainer/HBoxContainer/Label
+
 var roll_set_container = preload("res://elements/roll_set_container.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.drag_element = _drag_element
 	roll_button.pressed.connect(on_roll)
 	save_button.pressed.connect(on_save)
 	add_button.pressed.connect(on_add)
@@ -24,6 +27,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
+						
+				
+			
+			
 	
 func on_roll():
 	for child in rolls_container.get_children():

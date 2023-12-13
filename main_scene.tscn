@@ -95,6 +95,15 @@ texture_region_size = Vector2i(20, 20)
 1:3/0 = 0
 2:3/0 = 0
 3:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+3:4/0 = 0
+2:4/0 = 0
+1:4/0 = 0
+0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_7qa8c"]
 tile_size = Vector2i(20, 20)
@@ -119,7 +128,9 @@ font_size = 42
 script = ExtResource("1_e2nxv")
 
 [node name="Window" type="Window" parent="."]
+mode = 3
 size = Vector2i(800, 600)
+visible = false
 borderless = true
 
 [node name="PlayerMapController" type="Node2D" parent="Window"]
@@ -1127,7 +1138,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RollBoxController" type="Control" parent="."]
-visible = false
 custom_minimum_size = Vector2(410, 229)
 layout_mode = 3
 anchors_preset = 0
@@ -1168,6 +1178,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="RollBoxController/BoxContainer/ControllerBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Dice Sim"
 
 [node name="SaveLoadContainer" type="BoxContainer" parent="RollBoxController/BoxContainer/ControllerBoxContainer"]
